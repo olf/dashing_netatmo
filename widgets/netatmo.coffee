@@ -1,7 +1,5 @@
 class Dashing.Netatmo extends Dashing.Widget
     onData: (data) ->
-        # console.log(data)
-
         @set('outdoor_min_temp_time', @getTimeString(data.outdoor.date_min_temp))
         @set('outdoor_max_temp_time', @getTimeString(data.outdoor.date_max_temp))
 
@@ -21,12 +19,12 @@ class Dashing.Netatmo extends Dashing.Widget
             if parseInt(@get('indoor.Temperature')) > parseInt(@get('previous_indoor.Temperature')) then @set('indoor_temperature_arrow', 'icon-arrow-up')
             if parseInt(@get('indoor.Temperature')) < parseInt(@get('previous_indoor.Temperature')) then @set('indoor_temperature_arrow', 'icon-arrow-down')
 
-
     getTimeString: (time) ->
         d = new Date(time*1000)
 
         h = d.getHours()
         m = d.getMinutes()
+
         h = @formatTime(h)
         m = @formatTime(m)
 

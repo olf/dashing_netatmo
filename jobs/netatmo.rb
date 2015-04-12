@@ -18,6 +18,9 @@ end
 indoor_data = nil
 outdoor_data = nil
 
+previous_indoor_data = nil
+previous_outdoor_data = nil
+
 config = YAML.load_file("config/netatmo.yml")
 
 SCHEDULER.every '10s' do
