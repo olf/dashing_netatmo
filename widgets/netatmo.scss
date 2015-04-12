@@ -1,0 +1,53 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color: #88f;
+$header-background-color: rgba(0, 0, 0, .3);
+
+// ----------------------------------------------------------------------------
+// Widget-clock styles
+// ----------------------------------------------------------------------------
+
+.widget-netatmo {
+
+  background-color: $background-color;
+
+  h3 {
+    background: $header-background-color;
+  }
+
+  .minmax {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 100%;
+    padding-bottom:20px;
+    text-align: left;
+    width: 100%;
+
+    td {
+      padding: 0;
+      text-align: center;
+    }
+
+    .time {
+      font-size: 80%;
+      font-weight: normal;
+    }
+
+    .number {
+      font-size: 100%;
+      font-weight: normal;
+    }
+  }
+
+  .number {
+    font-size: 200%;
+    font-weight: bold;
+  }
+
+  .reading {
+    line-height: 160%;
+    margin: .5em 0;
+  }
+
+}

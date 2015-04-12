@@ -1,0 +1,6 @@
+app_id: your_app_id
+app_secret: your_app_secret
+username: your_username
+password: your_password
+indoor_name: name_of_your_indoor_station
+outdoor_name: name_of_your_outdoor_station
