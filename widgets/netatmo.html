@@ -1,48 +1,54 @@
 <!-- Outdoor -->
 
-<h3>Outdoor</h3>
+<div class="block">
+    <h3>Outdoor</h3>
 
-<div class="reading">
-    <i data-bind-class="outdoor_temperature_arrow"></i>
-    <span class="number" data-bind="outdoor.Temperature | shortenedNumber"></span>
+    <div class="reading">
+        <i data-bind-class="outdoor_temperature_arrow"></i>
+        <span class="number" data-bind="outdoor.Temperature | shortenedNumber"></span>
+    </div>
+
+    <table class="minmax">
+        <tr>
+            <td class="number" data-bind="outdoor.min_temp | shortenedNumber"></td>
+            <td class="number" data-bind="outdoor.max_temp | shortenedNumber"></td>
+        </tr>
+        <tr>
+            <td class="time" data-bind="outdoor_min_temp_time"></td>
+            <td class="time" data-bind="outdoor_max_temp_time"></td>
+        </tr>
+    </table>
 </div>
-
-<table class="minmax">
-    <tr>
-        <td class="number" data-bind="outdoor.min_temp | shortenedNumber"></td>
-        <td class="number" data-bind="outdoor.max_temp | shortenedNumber"></td>
-    </tr>
-    <tr>
-        <td class="time" data-bind="outdoor_min_temp_time"></td>
-        <td class="time" data-bind="outdoor_max_temp_time"></td>
-    </tr>
-</table>
 
 <!-- Indoor -->
 
-<h3>Indoor</h3>
+<div class="block">
+    <h3>Indoor</h3>
 
-<div class="reading">
-    <i data-bind-class="indoor_temperature_arrow"></i>
-    <span class="number" data-bind="indoor.Temperature | shortenedNumber"></span>
+    <div class="reading">
+        <i data-bind-class="indoor_temperature_arrow"></i>
+        <span class="number" data-bind="indoor.Temperature | shortenedNumber"></span>
+    </div>
+
+    <table class="minmax">
+        <tr>
+            <td class="number" data-bind="indoor.min_temp | shortenedNumber"></td>
+            <td class="number" data-bind="indoor.max_temp | shortenedNumber"></td>
+        </tr>
+        <tr>
+            <td class="time" data-bind="indoor_min_temp_time"></td>
+            <td class="time" data-bind="indoor_max_temp_time"></td>
+        </tr>
+    </table>
 </div>
-
-<table class="minmax">
-    <tr>
-        <td class="number" data-bind="indoor.min_temp | shortenedNumber"></td>
-        <td class="number" data-bind="indoor.max_temp | shortenedNumber"></td>
-    </tr>
-    <tr>
-        <td class="time" data-bind="indoor_min_temp_time"></td>
-        <td class="time" data-bind="indoor_max_temp_time"></td>
-    </tr>
-</table>
 
 <!-- CO2 -->
 
-<h3>CO2</h3>
+<div class="block">
+    <h3>CO2</h3>
 
-<div class="reading">
-    <i data-bind-class="co2_arrow"></i>
-    <span class="number" data-bind="indoor.CO2"></span>
+    <div class="reading">
+        <i data-bind-class="co2_arrow"></i>
+        <span class="number" data-bind="indoor.CO2"></span>
+    </div>
 </div>

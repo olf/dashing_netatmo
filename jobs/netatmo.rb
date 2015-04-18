@@ -23,16 +23,16 @@ previous_outdoor_data = nil
 
 config = YAML.load_file("config/netatmo.yml")
 
-SCHEDULER.every '10s' do
-  parameters = [
-      Curl::PostField.content('grant_type', 'password'),
-      Curl::PostField.content('client_id', config['app_id']),
-      Curl::PostField.content('client_secret', config['app_secret']),
-      Curl::PostField.content('username', config['username']),
-      Curl::PostField.content('password', config['password']),
-      Curl::PostField.content('scope', 'read_station')
-  ]
+parameters = [
+    Curl::PostField.content('grant_type', 'password'),
+    Curl::PostField.content('client_id', config['app_id']),
+    Curl::PostField.content('client_secret', config['app_secret']),
+    Curl::PostField.content('username', config['username']),
+    Curl::PostField.content('password', config['password']),
+    Curl::PostField.content('scope', 'read_station')
+]
 
+SCHEDULER.every '10s' do
   c = Curl::Easy.http_post("https://api.netatmo.net/oauth2/token", *parameters) do |curl|
       curl.headers["Content-Type"] = 'application/x-www-form-urlencoded;charset=UTF-8'
   end
@@ -41,21 +41,26 @@ SCHEDULER.every '10s' do
       puts "Netatmo Auth Response: #{c.response_code}"
   else
     json = JSON.parse(c.body_str)
+    token = json['access_token']
 
-    answer = JSON.parse(Curl.get("https://api.netatmo.net/api/devicelist?access_token=#{json['access_token']}").body_str)
+    answer = JSON.parse(Curl.get("https://api.netatmo.net/api/devicelist?access_token=#{token}").body_str)
 
-    previous_indoor_data  = indoor_data
-    previous_outdoor_data = outdoor_data
+    if answer.include? 'status'
+      previous_indoor_data  = indoor_data
+      previous_outdoor_data = outdoor_data
 
-    indoor_data = get_dashboard_data(answer['body']['devices'], 'station_name', config['indoor_name'])
-    outdoor_data = get_dashboard_data(answer['body']['modules'], 'module_name', config['outdoor_name'])
+      indoor_data  = get_dashboard_data(answer['body']['devices'], 'station_name', config['indoor_name'])
+      outdoor_data = get_dashboard_data(answer['body']['modules'], 'module_name', config['outdoor_name'])
 
-    send_event('netatmo',
-      indoor:  indoor_data,
-      outdoor: outdoor_data,
+      send_event('netatmo',
+        indoor:  indoor_data,
+        outdoor: outdoor_data,
 
-      previous_indoor: previous_indoor_data,
-      previous_outdoor: previous_outdoor_data
-    )
+        previous_indoor: previous_indoor_data,
+        previous_outdoor: previous_outdoor_data
+      )
+    else
+      puts "#{Time.now} Netatmo error: #{answer['error']['message']} (#{answer['error']['code']})"
+    end
   end
 end

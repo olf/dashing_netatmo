@@ -9,45 +9,50 @@ $header-background-color: rgba(0, 0, 0, .3);
 // ----------------------------------------------------------------------------
 
 .widget-netatmo {
-
   background-color: $background-color;
+
+  .block {
+    padding: 5px 1px;
+  }
 
   h3 {
     background: $header-background-color;
+  }
+
+  .reading {
+    .number {
+      font-size: 250%;
+      font-weight: bold;
+
+    }
+
+    i {
+      font-size:150%;
+      vertical-align: 25%;
+      color: rgba(255,255,255, .5);
+    }
   }
 
   .minmax {
     border-collapse: separate;
     border-spacing: 0;
     font-size: 100%;
-    padding-bottom: 1.5em;
     text-align: left;
     width: 100%;
 
     td {
       padding: 0;
       text-align: center;
-    }
-
-    .time {
-      font-size: 80%;
-      font-weight: normal;
+      width: 50%;
     }
 
     .number {
-      font-size: 100%;
+      font-size: 120%;
+    }
+
+    .time {
       font-weight: normal;
     }
-  }
-
-  .number {
-    font-size: 200%;
-    font-weight: bold;
-  }
-
-  .reading {
-    line-height: 160%;
-    margin: .5em 0;
   }
 
 }

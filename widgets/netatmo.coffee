@@ -1,4 +1,15 @@
 class Dashing.Netatmo extends Dashing.Widget
+    ready: ->
+        @set('outdoor_min_temp_time', '--')
+        @set('outdoor_max_temp_time', '--')
+
+        @set('indoor_min_temp_time', '--')
+        @set('indoor_max_temp_time', '--')
+
+        @set('co2_arrow', 'icon-arrow-right')
+        @set('outdoor_temperature_arrow', 'icon-arrow-right')
+        @set('indoor_temperature_arrow', 'icon-arrow-right')
+
     onData: (data) ->
         @set('outdoor_min_temp_time', @getTimeString(data.outdoor.date_min_temp))
         @set('outdoor_max_temp_time', @getTimeString(data.outdoor.date_max_temp))
@@ -25,7 +36,6 @@ class Dashing.Netatmo extends Dashing.Widget
         h = d.getHours()
         m = d.getMinutes()
 
-        h = @formatTime(h)
         m = @formatTime(m)
 
         return h + ":" + m
