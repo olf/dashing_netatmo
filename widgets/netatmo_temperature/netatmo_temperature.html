@@ -1,0 +1,17 @@
+<h1 class="title" data-bind="title"></h1>
+
+<div class="value">
+    <i data-bind-class="temperature_arrow"></i>
+    <span data-bind="current.Temperature | shortenedNumber"></span>
+</div>
+
+<table class="minmax">
+    <tr>
+        <td class="number" data-bind="current.min_temp"></td>
+        <td class="number" data-bind="current.max_temp"></td>
+    </tr>
+    <tr>
+        <td class="time" data-bind="min_temp_time"></td>
+        <td class="time" data-bind="max_temp_time"></td>
+    </tr>
+</table>
