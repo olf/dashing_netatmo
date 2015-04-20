@@ -4,3 +4,4 @@ username: your_username
 password: your_password
 indoor_name: name_of_your_indoor_station
 outdoor_name: name_of_your_outdoor_station
+interval: 60s

@@ -3,7 +3,7 @@ class Dashing.NetatmoTemperature extends Dashing.Widget
         @set('min_temp_time', '--')
         @set('max_temp_time', '--')
 
-        @set('temperature_arrow', 'icon-arrow-right')
+        @set('temperature_arrow', 'icon-chevron-right')
 
     onData: (data) ->
         @set('min_temp_time', @getTimeString(data.current.date_min_temp))
@@ -11,8 +11,8 @@ class Dashing.NetatmoTemperature extends Dashing.Widget
 
         # only set arrows when the value changes, keep previous state on equal
         if @get('previous.Temperature')
-            if parseFloat(@get('current.Temperature')) > parseFloat(@get('previous.Temperature')) then @set('temperature_arrow', 'icon-arrow-up')
-            if parseFloat(@get('current.Temperature')) < parseFloat(@get('previous.Temperature')) then @set('temperature_arrow', 'icon-arrow-down')
+            if parseFloat(@get('current.Temperature')) > parseFloat(@get('previous.Temperature')) then @set('temperature_arrow', 'icon-chevron-up')
+            if parseFloat(@get('current.Temperature')) < parseFloat(@get('previous.Temperature')) then @set('temperature_arrow', 'icon-chevron-down')
 
     getTimeString: (time) ->
         d = new Date(time*1000)

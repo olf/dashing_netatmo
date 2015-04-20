@@ -32,7 +32,9 @@ parameters = [
     Curl::PostField.content('scope', 'read_station')
 ]
 
-SCHEDULER.every '10s' do
+interval = config['interval']
+
+SCHEDULER.every interval do
     c = Curl::Easy.http_post("https://api.netatmo.net/oauth2/token", *parameters) do |curl|
         curl.headers["Content-Type"] = 'application/x-www-form-urlencoded;charset=UTF-8'
     end
