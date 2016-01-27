@@ -3,39 +3,37 @@
 // ----------------------------------------------------------------------------
 
 .widget-netatmo-temperature {
-  .value {
-    padding: 5px 0;
+  padding: 4px 0;
 
-    i {
-      color: rgba(255, 255, 255, .5);
-      font-size: 50%;
-      vertical-align: 33%;
+  i {
+    color: rgba(255, 255, 255, .5);
+    font-size: 50%;
+    vertical-align: 33%;
+  }
+
+  .postfix {
+    color: rgba(255, 255, 255, .5);
+  }
+
+  .minmax {
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    width: 100%;
+
+    td {
+      padding: 0;
+      text-align: center;
+      width: 50%;
     }
 
-    .postfix {
-      color: rgba(255, 255, 255, .5);
+    .number {
+      font-size: 90%;
     }
 
-    .minmax {
-      border-collapse: separate;
-      border-spacing: 0;
-      text-align: left;
-      width: 100%;
-
-      td {
-        padding: 0;
-        text-align: center;
-        width: 50%;
-      }
-
-      .number {
-        font-size: 90%;
-      }
-
-      .time {
-        font-size:80%;
-        font-weight: normal;
-      }
+    .time {
+      font-size: 80%;
+      font-weight: normal;
     }
   }
 }

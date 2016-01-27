@@ -34,7 +34,7 @@ parameters = [
 
 interval = config['interval']
 
-SCHEDULER.every interval do
+SCHEDULER.every interval, :first_in => 0 do
     c = Curl::Easy.http_post("https://api.netatmo.net/oauth2/token", *parameters) do |curl|
         curl.headers["Content-Type"] = 'application/x-www-form-urlencoded;charset=UTF-8'
     end
