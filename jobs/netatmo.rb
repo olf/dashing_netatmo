@@ -23,6 +23,13 @@ previous_outdoor_data = nil
 
 config = YAML.load_file("config/netatmo.yml")
 
+# -- maintain compatibility with older version:
+
+station_name = config['station_name'] ? config['station_name'] : config['indoor_name']
+module_name  = config['module_name']  ? config['module_name']  : config['outdoor_name']
+
+# --
+
 parameters = [
     Curl::PostField.content('grant_type', 'password'),
     Curl::PostField.content('client_id', config['app_id']),
@@ -51,8 +58,11 @@ SCHEDULER.every interval, :first_in => 0 do
             previous_indoor_data  = indoor_data
             previous_outdoor_data = outdoor_data
 
-            indoor_data  = get_dashboard_data(answer['body']['devices'], 'station_name', config['indoor_name'])
-            outdoor_data = get_dashboard_data(answer['body']['modules'], 'module_name', config['outdoor_name'])
+            indoor_data  = get_dashboard_data(answer['body']['devices'], 'station_name', station_name)
+            outdoor_data = get_dashboard_data(answer['body']['modules'], 'module_name', module_name)
+
+            puts "Netatmo: No indoor data" if indoor_data == nil
+            puts "Netatmo: No outdoor data" if outdoor_data == nil
 
             if previous_outdoor_data != nil && previous_indoor_data != nil
                 send_event('netatmo_indoor',  current: indoor_data,  previous: previous_indoor_data)
