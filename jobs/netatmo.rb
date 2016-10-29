@@ -52,7 +52,7 @@ SCHEDULER.every interval, :first_in => 0 do
         json = JSON.parse(c.body_str)
         token = json['access_token']
 
-        answer = JSON.parse(Curl.get("https://api.netatmo.net/api/devicelist?access_token=#{token}").body_str)
+        answer = JSON.parse(Curl.get("https://api.netatmo.net/api/getstationsdata?access_token=#{token}").body_str)
 
         if answer.include? 'status'
             previous_indoor_data  = indoor_data
