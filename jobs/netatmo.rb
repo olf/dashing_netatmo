@@ -2,17 +2,14 @@ require 'curb'
 require 'json'
 require 'yaml'
 
-def get_dashboard_data(nodes, node_name, name)
-    data = nil
-
+def find_entity(nodes, attribute, name)
     nodes.each { |node|
-        if node[node_name] == name then
-            data = node['dashboard_data']
-            break
+        if node[attribute] == name then
+            return node
         end
     }
 
-    return data
+    return nil
 end
 
 indoor_data = nil
@@ -52,14 +49,19 @@ SCHEDULER.every interval, :first_in => 0 do
         json = JSON.parse(c.body_str)
         token = json['access_token']
 
-        answer = JSON.parse(Curl.get("https://api.netatmo.net/api/devicelist?access_token=#{token}").body_str)
+        answer = JSON.parse(Curl.get("https://api.netatmo.net/api/getstationsdata?access_token=#{token}").body_str)
 
         if answer.include? 'status'
             previous_indoor_data  = indoor_data
             previous_outdoor_data = outdoor_data
 
-            indoor_data  = get_dashboard_data(answer['body']['devices'], 'station_name', station_name)
-            outdoor_data = get_dashboard_data(answer['body']['modules'], 'module_name', module_name)
+            station = find_entity(answer['body']['devices'], 'station_name', station_name)
+            indoor_data = station['dashboard_data'] if station != nil
+
+            if station != nil
+                outdoor = find_entity(station['modules'], 'module_name', module_name) if station != nil
+                outdoor_data = outdoor['dashboard_data'] if outdoor != nil
+            end
 
             puts "Netatmo: No indoor data" if indoor_data == nil
             puts "Netatmo: No outdoor data" if outdoor_data == nil
